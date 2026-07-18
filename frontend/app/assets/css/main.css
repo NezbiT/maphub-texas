@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: hsl(30 10% 98%);
+  --foreground: hsl(30 10% 12%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(30 10% 12%);
+  --primary: hsl(24 95% 53%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(30 10% 94%);
+  --secondary-foreground: hsl(30 10% 22%);
+  --muted: hsl(30 8% 95%);
+  --muted-foreground: hsl(30 6% 42%);
+  --accent: hsl(24 90% 95%);
+  --accent-foreground: hsl(24 80% 28%);
+  --destructive: hsl(0 72% 45%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(30 10% 88%);
+  --input: hsl(30 8% 84%);
+  --ring: hsl(24 95% 53%);
+  --radius: 0.625rem;
+}
+
+.dark {
+  --background: hsl(30 12% 7%);
+  --foreground: hsl(40 15% 94%);
+  --card: hsl(30 12% 10%);
+  --card-foreground: hsl(40 15% 94%);
+  --primary: hsl(24 95% 58%);
+  --primary-foreground: hsl(30 40% 8%);
+  --secondary: hsl(30 10% 15%);
+  --secondary-foreground: hsl(40 15% 94%);
+  --muted: hsl(30 10% 14%);
+  --muted-foreground: hsl(30 8% 62%);
+  --accent: hsl(24 40% 16%);
+  --accent-foreground: hsl(24 95% 72%);
+  --destructive: hsl(0 72% 52%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(30 10% 18%);
+  --input: hsl(30 10% 22%);
+  --ring: hsl(24 95% 58%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+.mh-layer-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s, background 0.15s, color 0.15s, box-shadow 0.15s;
+  user-select: none;
+}
+.mh-layer-chip:hover {
+  transform: translateY(-1px);
+  color: var(--foreground);
+}
+.mh-layer-chip:active {
+  transform: scale(0.98);
+}
+.mh-layer-chip--on {
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--chip) 40%, transparent),
+    0 8px 20px -10px var(--chip);
+  background: color-mix(in srgb, var(--chip) 88%, #000);
+}
+.mh-layer-chip__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--chip, var(--primary));
+  box-shadow: 0 0 8px var(--chip, var(--primary));
+}
+
+.mh-map-root :deep(.maplibregl-map) {
+  width: 100%;
+  height: 100%;
+}
+.mh-map-root :deep(.maplibregl-ctrl-group) {
+  border-radius: 10px;
+  overflow: hidden;
+}
+.mh-map-root :deep(.maplibregl-popup-content) {
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: #0f172a;
+}
+
+.mh-panel-enter-active,
+.mh-panel-leave-active {
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.mh-panel-enter-from,
+.mh-panel-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
+}

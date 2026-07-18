@@ -1,0 +1,49 @@
+{
+  "app": {
+    "name": "Map Hub Texas",
+    "tagline": "Todas las capas · un mapa"
+  },
+  "nav": {
+    "map": "Mapa",
+    "about": "Acerca de"
+  },
+  "common": {
+    "loading": "Cargando…",
+    "lightMode": "Modo claro",
+    "darkMode": "Modo oscuro",
+    "createdBy": "Creado por"
+  },
+  "home": {
+    "title": "Texas, un mapa",
+    "subtitle": "Datos en vivo de cada app de la suite — las mismas APIs que el producto completo. Filtra capas y abre la app real desde cualquier pin.",
+    "layers": "Capas",
+    "all": "Todas",
+    "none": "Limpiar",
+    "clear": "Cerrar",
+    "refresh": "Actualizar",
+    "hint": "Activa un chip de capa para cargar esa API. Toca un pin para el detalle.",
+    "pickLayers": "Filtros apagados — activa una capa para cargar datos",
+    "showing": "Mostrando {n} de {total} puntos cargados",
+    "signal": "Señal",
+    "openApp": "Abrir en app completa",
+    "disclaimer": "Map Hub consulta la API de cada producto. Si una fuente cae, esa capa usa pins demo hasta recuperarse.",
+    "liveSources": "{n}/{total} capas en vivo desde las apps",
+    "sourceLive": "En vivo",
+    "sourceDemo": "Demo",
+    "fetchError": "No se pudieron actualizar las capas",
+    "zipLabel": "Código postal",
+    "zipPlaceholder": "77002",
+    "zipSearch": "Buscar ZIP",
+    "zipClear": "Quitar ZIP",
+    "zipNearOnly": "Solo cerca del ZIP",
+    "zipInvalid": "Escribe un ZIP de Texas de 5 dígitos",
+    "zipError": "No se encontró ese ZIP",
+    "zipActive": "Enfocado en {label}"
+  },
+  "about": {
+    "title": "Acerca de Map Hub",
+    "body": "Map Hub es el centro de TxBizFinder Intelligence. No inventa datos: llama a los mismos backends que cada app completa y los dibuja juntos.",
+    "layers": "Finder → /api/leads · Radar → /api/permits · Channel → monitores/eventos · Sentinel → /v1/facilities · Flood → /api/risk/zones · Power → /api/grid/regions.",
+    "suite": "Apps hermanas: TxBizFinder, PermitRadar, ChannelWatch, Emissions Sentinel, FloodGuard Texas, PowerPulse Texas."
+  }
+}
