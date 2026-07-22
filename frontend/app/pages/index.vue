@@ -51,6 +51,23 @@ const fetchError = ref(false)
 
 const pending = computed(() => loadingLayers.value.size > 0)
 
+/** Suite intelligence pulse (WorldMonitor-style overview) */
+const {
+  data: overview,
+  pending: overviewPending,
+  refresh: refreshOverview,
+} = await useFetch('/api/suite/overview', {
+  server: false,
+  query: computed(() => ({
+    timeRange: typeof route.query.timeRange === 'string' ? route.query.timeRange : '7d',
+    zip: zipFocus.value?.zip || '',
+  })),
+  watch: false,
+})
+
+const pulseLevel = computed(() => overview.value?.pulse?.level || 'calm')
+const pulseScore = computed(() => overview.value?.pulse?.score ?? null)
+
 const allLoadedPoints = computed<HubPoint[]>(() => {
   const out: HubPoint[] = []
   for (const id of ALL_LAYERS) {
@@ -246,6 +263,7 @@ function clearAll() {
 async function refresh() {
   // Reload only layers that are currently on
   await Promise.all(activeLayers.value.map((id) => ensureLayer(id, true)))
+  await refreshOverview()
 }
 
 function onSelect(p: HubPoint) {
@@ -290,6 +308,31 @@ onMounted(async () => {
                 {{ t('home.pickLayers') }}
               </template>
             </p>
+            <div
+              v-if="pulseScore != null"
+              class="mt-2 inline-flex flex-wrap items-center gap-2 rounded-xl border border-border/80 bg-card/80 px-2.5 py-1 text-xs"
+            >
+              <span class="font-semibold uppercase tracking-wide text-muted-foreground">{{ t('home.pulse') }}</span>
+              <span
+                class="rounded-md px-1.5 py-0.5 font-semibold capitalize"
+                :class="{
+                  'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400': pulseLevel === 'calm',
+                  'bg-amber-500/15 text-amber-700 dark:text-amber-400': pulseLevel === 'elevated',
+                  'bg-orange-500/15 text-orange-700 dark:text-orange-400': pulseLevel === 'heightened',
+                  'bg-red-500/15 text-red-600 dark:text-red-400': pulseLevel === 'critical',
+                }"
+              >
+                {{ pulseLevel }} · {{ pulseScore }}
+              </span>
+              <span v-if="overviewPending" class="text-muted-foreground">…</span>
+              <span
+                v-for="(d, i) in (overview?.pulse?.drivers || []).slice(0, 2)"
+                :key="i"
+                class="text-muted-foreground"
+              >
+                · {{ d }}
+              </span>
+            </div>
           </div>
         </div>
         <div class="flex flex-wrap gap-2">

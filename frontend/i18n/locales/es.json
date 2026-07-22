@@ -38,7 +38,8 @@
     "zipNearOnly": "Solo cerca del ZIP",
     "zipInvalid": "Escribe un ZIP de Texas de 5 dígitos",
     "zipError": "No se encontró ese ZIP",
-    "zipActive": "Enfocado en {label}"
+    "zipActive": "Enfocado en {label}",
+    "pulse": "Pulso Texas"
   },
   "about": {
     "title": "Acerca de Map Hub",

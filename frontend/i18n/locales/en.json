@@ -38,7 +38,8 @@
     "zipNearOnly": "Near ZIP only",
     "zipInvalid": "Enter a 5-digit Texas ZIP",
     "zipError": "Could not find that ZIP",
-    "zipActive": "Focused on {label}"
+    "zipActive": "Focused on {label}",
+    "pulse": "Texas pulse"
   },
   "about": {
     "title": "About Map Hub",

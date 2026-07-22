@@ -18,8 +18,11 @@ export default defineEventHandler(async (event) => {
   // Short CDN cache; live apps change more often than weekly ingest
   setResponseHeader(event, 'Cache-Control', 'public, max-age=30, stale-while-revalidate=60')
 
+  const timeRange = typeof q.timeRange === 'string' ? q.timeRange : '7d'
+
   return {
     source: 'suite-live',
+    timeRange,
     count: result.points.length,
     byLayer: result.byLayer,
     sources: result.sources,
@@ -30,5 +33,11 @@ export default defineEventHandler(async (event) => {
       error: l.error || null,
     })),
     points: result.points,
+    meta: {
+      suite: 'txbizfinder-intelligence',
+      product: 'maphub-texas',
+      asOf: new Date().toISOString(),
+      timeRange,
+    },
   }
 })
