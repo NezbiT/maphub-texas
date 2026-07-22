@@ -49,6 +49,9 @@ const switchLocale = () => setLocale(locale.value === 'en' ? 'es' : 'en')
         </nav>
 
         <div class="ml-auto flex items-center gap-1.5">
+          <div class="hidden lg:block">
+            <SuiteNav />
+          </div>
           <Badge v-if="isDemoMode" variant="warning" class="hidden sm:inline-flex">DEMO</Badge>
           <Button variant="ghost" size="sm" class="gap-1.5 font-semibold" @click="switchLocale">
             <Languages class="size-4" />

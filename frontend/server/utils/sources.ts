@@ -1,7 +1,9 @@
 /**
- * Upstream full-app bases. Map Hub does not invent data — it proxies/normalizes
- * the same public APIs each product already serves.
+ * Upstream product bases — single place for MapHub wiring.
+ * Ports match WEB/txbizfinder-suite/suite.config.json
  */
+import { joinUrl, safeFetch, stripSlash } from './http'
+
 export type SourceConfig = {
   finderApi: string
   finderApp: string
@@ -23,7 +25,6 @@ export function getSources(): SourceConfig {
   const s = (cfg as any).sources || {}
   const pub = (cfg.public as any)?.suite || {}
 
-  // Private server bases (prefer explicit API hosts). Fall back to local suite ports in dev.
   return {
     finderApi: String(s.finderApi || process.env.MAPHUB_FINDER_API || 'http://127.0.0.1:8000'),
     finderApp: String(pub.finder || process.env.NUXT_PUBLIC_FINDER_URL || 'http://127.0.0.1:5173/app'),
@@ -41,28 +42,4 @@ export function getSources(): SourceConfig {
   }
 }
 
-export function stripSlash(url: string) {
-  return url.replace(/\/+$/, '')
-}
-
-export function joinUrl(base: string, path: string) {
-  const b = stripSlash(base)
-  const p = path.startsWith('/') ? path : `/${path}`
-  return `${b}${p}`
-}
-
-export async function safeFetch<T>(
-  url: string,
-  opts: { headers?: Record<string, string>; timeoutMs?: number } = {},
-): Promise<{ ok: true; data: T } | { ok: false; error: string }> {
-  try {
-    const data = await $fetch<T>(url, {
-      headers: opts.headers,
-      timeout: opts.timeoutMs ?? 12_000,
-    })
-    return { ok: true, data }
-  } catch (e: any) {
-    const msg = e?.data?.statusMessage || e?.message || String(e)
-    return { ok: false, error: msg }
-  }
-}
+export { joinUrl, safeFetch, stripSlash }
