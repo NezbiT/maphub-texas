@@ -45,6 +45,12 @@
     "title": "Acerca de Map Hub",
     "body": "Map Hub es el centro de TxBizFinder Intelligence. No inventa datos: llama a los mismos backends que cada app completa y los dibuja juntos.",
     "layers": "Finder → /api/leads · Radar → /api/permits · Channel → monitores/eventos · Sentinel → /v1/facilities · Flood → /api/risk/zones · Power → /api/grid/regions.",
+    "confidenceTitle": "Niveles de confianza (suite)",
+    "productMapTitle": "Mapa producto → fuente prioritaria",
+    "productMapHint": "API/open data primero; scrape solo donde esté justificado (roadmap §6).",
+    "colProduct": "Producto",
+    "colApi": "API / open data prioritaria",
+    "colScrape": "Scrape",
     "suite": "Apps hermanas: TxBizFinder, PermitRadar, ChannelWatch, Emissions Sentinel, FloodGuard Texas, PowerPulse Texas."
   }
 }
