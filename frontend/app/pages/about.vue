@@ -120,5 +120,10 @@ const confidenceLegend: { key: Confidence; labelEn: string; labelEs: string; cls
     </section>
 
     <p class="text-sm leading-relaxed text-muted-foreground">{{ t('about.suite') }}</p>
+    <p class="text-sm text-muted-foreground">
+      <NuxtLink to="/terms" class="text-primary hover:underline">{{ t('legal.termsTitle') }}</NuxtLink>
+      ·
+      <NuxtLink to="/privacy" class="text-primary hover:underline">{{ t('legal.privacyTitle') }}</NuxtLink>
+    </p>
   </div>
 </template>

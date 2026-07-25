@@ -1,32 +1,32 @@
 {
   "app": {
     "name": "Map Hub Texas",
-    "tagline": "All suite layers · one map"
+    "tagline": "All suite layers Â· one map"
   },
   "nav": {
     "map": "Map",
     "about": "About"
   },
   "common": {
-    "loading": "Loading…",
+    "loading": "Loadingâ€¦",
     "lightMode": "Light mode",
     "darkMode": "Dark mode",
     "createdBy": "Created by"
   },
   "home": {
     "title": "Texas, one map",
-    "subtitle": "Live data from every suite app — same APIs as the full products. Toggle layers and open the real app from any pin.",
+    "subtitle": "Live data from every suite app â€” same APIs as the full products. Toggle layers and open the real app from any pin.",
     "layers": "Layers",
     "all": "All layers",
     "none": "Clear",
     "clear": "Close",
     "refresh": "Refresh",
     "hint": "Turn on a layer chip to load that full-app API. Tap a pin for details.",
-    "pickLayers": "All filters off — turn on a layer to load data",
+    "pickLayers": "All filters off â€” turn on a layer to load data",
     "showing": "Showing {n} of {total} loaded points",
     "signal": "Signal",
     "openApp": "Open in full app",
-    "disclaimer": "Map Hub proxies each product’s live API. If a source is offline, that layer falls back to demo pins until it recovers.",
+    "disclaimer": "Map Hub proxies each productâ€™s live API. If a source is offline, that layer falls back to demo pins until it recovers.",
     "liveSources": "{n}/{total} layers live from full apps",
     "sourceLive": "Live",
     "sourceDemo": "Demo",
@@ -43,14 +43,36 @@
   },
   "about": {
     "title": "About Map Hub",
-    "body": "Map Hub is the center of TxBizFinder Intelligence. It does not invent data — it calls the same backends each full app uses and plots them together.",
-    "layers": "Finder → /api/leads · Radar → /api/permits · Channel → monitors/events · Sentinel → /v1/facilities · Flood → /api/risk/zones · Power → /api/grid/regions.",
+    "body": "Map Hub is the center of TxBizFinder Intelligence. It does not invent data â€” it calls the same backends each full app uses and plots them together.",
+    "layers": "Finder â†’ /api/leads Â· Radar â†’ /api/permits Â· Channel â†’ monitors/events Â· Sentinel â†’ /v1/facilities Â· Flood â†’ /api/risk/zones Â· Power â†’ /api/grid/regions.",
     "confidenceTitle": "Confidence levels (suite-wide)",
-    "productMapTitle": "Product → priority source map",
-    "productMapHint": "API/open data first; scrape only where justified (roadmap §6).",
+    "productMapTitle": "Product â†’ priority source map",
+    "productMapHint": "API/open data first; scrape only where justified (roadmap Â§6).",
     "colProduct": "Product",
     "colApi": "Priority API / open data",
     "colScrape": "Scrape",
     "suite": "Sister apps: TxBizFinder, PermitRadar, ChannelWatch, Emissions Sentinel, FloodGuard Texas, PowerPulse Texas."
+  },
+  "legal": {
+    "termsTitle": "Terms of use",
+    "privacyTitle": "Privacy notice",
+    "updated": "Last updated: 2026-07-24. Not legal advice — consult counsel for production contracts.",
+    "notAdvice": "This product provides informational tools based on public and third-party data. It is not a substitute for professional advice, official agency determinations, or licensed services.",
+    "termsH1": "1. Nature of the service",
+    "termsB1": "You receive access to maps, APIs, and analytics for situational awareness. Flood, grid, air, permit, and business data may be delayed, incomplete, modeled, or labeled demo. We do not provide FEMA flood determinations, insurance quotes, underwriting decisions, ERCOT operational instructions, or legal/compliance certifications.",
+    "termsH2": "2. Acceptable use",
+    "termsB2": "You may not overload our systems, bypass rate limits or authentication, scrape our UI to rebuild the product, or use the service for unlawful solicitation. Contacting business leads requires compliance with TCPA, CAN-SPAM, and state telemarketing rules.",
+    "termsH3": "3. No warranties; limitation of liability",
+    "termsB3": "Service is provided AS IS and AS AVAILABLE. To the maximum extent permitted by law, we disclaim warranties of accuracy and fitness for a particular purpose. Liability is limited to fees you paid us in the prior 12 months (or USD 100 if free).",
+    "termsH4": "4. Governing law",
+    "termsB4": "These terms are governed by the laws of the State of Texas, excluding conflict-of-law rules. Venue lies in Texas state or federal courts unless a written Enterprise MSA says otherwise.",
+    "privacyH1": "1. Data we may process",
+    "privacyB1": "Depending on the product: IP address and request logs; ZIP codes or map coordinates you submit; account email if you register; API keys; saved searches; optional location if you grant browser geolocation (ChannelWatch). We process public open-data and may store derived warehouse tables.",
+    "privacyH2": "2. Purposes",
+    "privacyB2": "Operate and secure the service, improve reliability, provide saved features, bill paid tiers, and comply with law. We do not sell personal information as defined under the CCPA.",
+    "privacyH3": "3. Retention and security",
+    "privacyB3": "Logs are retained for a limited operational period. Use TLS in production, rotate API keys, and restrict admin keys. No method of transmission is 100% secure.",
+    "privacyH4": "4. Your rights",
+    "privacyB4": "Depending on your location (including California CCPA/CPRA and, if EU personal data is processed, GDPR), you may have rights to access, delete, or correct personal data. Contact legal@txbizfinder.com. Do not send sensitive personal data (SSN, health, full payment card) through this product."
   }
 }
