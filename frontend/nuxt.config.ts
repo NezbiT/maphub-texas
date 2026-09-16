@@ -1,7 +1,13 @@
 import tailwindcss from '@tailwindcss/vite'
 
-// On Vercel the app is served at www.txbizfinder.com/map via the path Worker.
-const baseURL = process.env.NUXT_APP_BASE_URL || (process.env.VERCEL ? '/map/' : '/')
+// Worker still strips /map → origin `/`. Keep the app at `/` and load assets
+// from this Vercel origin so txbizfinder.com/map is not Finder's /_nuxt.
+const baseURL = process.env.NUXT_APP_BASE_URL || '/'
+const cdnURL =
+  process.env.NUXT_APP_CDN_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/`
+    : '')
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -30,8 +36,12 @@ export default defineNuxtConfig({
       fallbackLocale: 'en',
     },
   },
+  routeRules: {
+    '/api/**': { cors: true },
+  },
   app: {
     baseURL,
+    ...(cdnURL ? { cdnURL } : {}),
     head: {
       title: 'Map Hub Texas — all suite layers on one map',
       meta: [
@@ -42,7 +52,7 @@ export default defineNuxtConfig({
             'Map Hub Texas — Finder, Radar, Channel, Sentinel, Flood, and Power on one interactive map with layer filters.',
         },
       ],
-      link: [{ rel: 'icon', type: 'image/svg+xml', href: `${baseURL}favicon.svg` }],
+      link: [{ rel: 'icon', type: 'image/svg+xml', href: `${cdnURL || baseURL}favicon.svg` }],
     },
   },
   runtimeConfig: {
@@ -58,6 +68,7 @@ export default defineNuxtConfig({
     },
     public: {
       appUrl: process.env.NUXT_PUBLIC_APP_URL || 'http://localhost:3015',
+      cdnOrigin: cdnURL.replace(/\/$/, ''),
       demoMode: process.env.NUXT_PUBLIC_DEMO_MODE !== 'false',
       appName: process.env.NUXT_PUBLIC_APP_NAME || 'Map Hub Texas',
       mapStyleUrl:

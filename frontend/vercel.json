@@ -3,8 +3,5 @@
   "framework": "nuxtjs",
   "installCommand": "npm install",
   "buildCommand": "npm run build",
-  "regions": ["iad1"],
-  "redirects": [
-    { "source": "/", "destination": "/map", "permanent": false }
-  ]
+  "regions": ["iad1"]
 }

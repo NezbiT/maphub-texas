@@ -1,4 +1,6 @@
 <script setup lang="ts">
+definePageMeta({ alias: ['/map/about'] })
+
 const { t, locale } = useI18n()
 useSeoMeta({
   title: () => `${t('app.name')} — ${t('nav.about')}`,

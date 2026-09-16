@@ -3,6 +3,8 @@ import { ALL_LAYERS, LAYER_META, type LayerId } from '~/lib/utils'
 import type { HubPoint } from '~/components/map/HubMap.client.vue'
 import { ExternalLink, Layers, MapPin, RefreshCw, Search, X } from 'lucide-vue-next'
 
+definePageMeta({ alias: ['/map'] })
+
 const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
