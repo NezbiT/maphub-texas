@@ -290,8 +290,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="flex flex-1 flex-col lg:gap-4 lg:p-6">
-    <section class="order-2 space-y-3 p-4 lg:order-1 lg:p-0">
+  <div class="flex h-[calc(100dvh-3.5rem)] min-h-0 flex-1 flex-col overflow-hidden lg:h-auto lg:min-h-0 lg:gap-4 lg:overflow-visible lg:p-6">
+    <section class="hidden space-y-3 lg:block">
       <div class="flex flex-wrap items-start justify-between gap-3">
         <div class="flex items-start gap-3">
           <div class="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
@@ -351,7 +351,6 @@ onMounted(async () => {
         </div>
       </div>
 
-      <!-- ZIP search -->
       <form class="flex flex-wrap items-end gap-2" @submit.prevent="searchZip">
         <div class="min-w-[10rem] flex-1 sm:max-w-[14rem]">
           <label class="mb-1 block text-xs font-medium text-muted-foreground" for="hub-zip">
@@ -434,8 +433,8 @@ onMounted(async () => {
       </p>
     </section>
 
-    <div class="order-1 grid flex-1 gap-0 lg:order-2 lg:grid-cols-[1fr_300px] lg:gap-4">
-      <div class="relative h-[58dvh] min-h-[280px] w-full lg:h-auto lg:min-h-[420px]">
+    <div class="relative min-h-0 flex-1 lg:grid lg:grid-cols-[1fr_300px] lg:gap-4">
+      <div class="absolute inset-0 min-h-[280px] lg:static lg:min-h-[420px]">
         <ClientOnly>
           <HubMap
             :points="mapPoints"
@@ -457,16 +456,94 @@ onMounted(async () => {
             </div>
           </template>
         </ClientOnly>
+
+        <div class="absolute inset-x-0 top-0 z-20 space-y-2 p-2 lg:hidden">
+          <form class="flex gap-2" @submit.prevent="searchZip">
+            <div class="relative min-w-0 flex-1">
+              <MapPin class="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+              <input
+                v-model="zipInput"
+                type="text"
+                inputmode="numeric"
+                maxlength="5"
+                pattern="[0-9]{5}"
+                :placeholder="t('home.zipPlaceholder')"
+                class="h-11 w-full rounded-xl border border-input bg-background pl-9 pr-3 text-sm shadow-md outline-none ring-ring focus:ring-2"
+              />
+            </div>
+            <Button type="submit" class="h-11 shrink-0 rounded-xl px-3 shadow-md" :disabled="zipPending || zipInput.replace(/\D/g, '').length < 5">
+              <Search class="size-4" :class="{ 'animate-pulse': zipPending }" />
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              class="h-11 shrink-0 rounded-xl bg-background px-3 shadow-md"
+              :disabled="pending || !activeLayers.length"
+              @click="refresh"
+            >
+              <RefreshCw class="size-4" :class="{ 'animate-spin': pending }" />
+            </Button>
+          </form>
+          <p v-if="zipError" class="rounded-lg bg-background/90 px-2 py-1 text-xs text-destructive">{{ zipError }}</p>
+          <div class="mh-chip-scroll flex gap-2 overflow-x-auto pb-1" role="group" :aria-label="t('home.layers')">
+            <button
+              v-for="id in ALL_LAYERS"
+              :key="`m-${id}`"
+              type="button"
+              class="mh-layer-chip shrink-0"
+              :class="{
+                'mh-layer-chip--on': activeLayers.includes(id),
+                'opacity-80': layerLoading(id),
+              }"
+              :style="{ '--chip': LAYER_META[id].color }"
+              :aria-pressed="activeLayers.includes(id)"
+              @click="toggleLayer(id)"
+            >
+              <span class="mh-layer-chip__dot" aria-hidden="true" />
+              {{ LAYER_META[id].label }}
+              <span v-if="layerLoading(id)" class="tabular-nums opacity-70">…</span>
+              <span v-else-if="counts[id]" class="opacity-70 tabular-nums">{{ counts[id] }}</span>
+            </button>
+          </div>
+        </div>
+
         <p
           v-if="!activeLayers.length"
-          class="pointer-events-none absolute inset-x-0 top-1/2 z-10 -translate-y-1/2 text-center text-sm text-white/90 drop-shadow"
+          class="pointer-events-none absolute inset-x-0 top-1/2 z-10 -translate-y-1/2 px-4 text-center text-sm text-white/90 drop-shadow"
         >
           {{ t('home.pickLayers') }}
         </p>
-        <p v-if="pending" class="mt-2 px-4 text-xs text-muted-foreground lg:px-0">{{ t('common.loading') }}</p>
+
+        <div
+          v-if="selected"
+          class="absolute inset-x-0 bottom-0 z-20 rounded-t-2xl border-t bg-background/95 p-4 shadow-2xl backdrop-blur lg:hidden"
+        >
+          <div class="mx-auto mb-2 h-1.5 w-10 rounded-full bg-muted-foreground/30" aria-hidden="true" />
+          <div class="flex items-start justify-between gap-2">
+            <div class="min-w-0">
+              <p
+                class="text-[11px] font-extrabold uppercase tracking-wider"
+                :style="{ color: LAYER_META[selected.layer].color }"
+              >
+                {{ LAYER_META[selected.layer].label }}
+              </p>
+              <p class="mt-0.5 truncate text-base font-bold">{{ selected.name }}</p>
+            </div>
+            <Button variant="ghost" size="sm" @click="clearSelect">{{ t('home.clear') }}</Button>
+          </div>
+          <p class="mt-2 line-clamp-3 text-sm text-muted-foreground">{{ selected.summary }}</p>
+          <Button
+            class="mt-3 w-full gap-2 rounded-xl"
+            :disabled="!selected.appUrl"
+            @click="openFullApp(selected)"
+          >
+            {{ t('home.openApp') }}
+            <ExternalLink class="size-4" />
+          </Button>
+        </div>
       </div>
 
-      <aside class="space-y-3 p-4 lg:p-0 lg:sticky lg:top-[4.25rem] lg:self-start">
+      <aside class="hidden space-y-3 lg:sticky lg:top-[4.25rem] lg:block lg:self-start">
         <Transition name="mh-panel" mode="out-in">
           <div v-if="selected" :key="selected.id" class="rounded-2xl border bg-card p-5 shadow-sm">
             <div class="flex items-start justify-between gap-2">

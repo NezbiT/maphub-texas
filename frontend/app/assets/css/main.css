@@ -117,6 +117,17 @@
   box-shadow: 0 0 8px var(--chip, var(--primary));
 }
 
+.mh-chip-scroll {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.mh-chip-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.mh-map-root {
+  overscroll-behavior: none;
+}
 .mh-map-root :deep(.maplibregl-map),
 .mh-map-root :deep(.maplibregl-canvas-container),
 .mh-map-root :deep(.maplibregl-canvas) {

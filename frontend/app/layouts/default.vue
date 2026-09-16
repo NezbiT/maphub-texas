@@ -20,7 +20,7 @@ const switchLocale = () => setLocale(locale.value === 'en' ? 'es' : 'en')
 </script>
 
 <template>
-  <div class="flex min-h-screen flex-col bg-background">
+  <div class="flex min-h-dvh flex-col bg-background">
     <header class="sticky top-0 z-30 border-b bg-background/80 backdrop-blur">
       <div class="flex h-14 items-center gap-3 px-4 lg:px-6">
         <NuxtLink to="/" class="flex items-center gap-2.5">

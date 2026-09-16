@@ -301,16 +301,18 @@ function initMap() {
       attributionControl: { compact: true },
       dragRotate: false,
       pitchWithRotate: false,
+      touchPitch: false,
       fadeDuration: 0,
       maxTileCacheSize: 50,
     })
+    map.touchZoomRotate.disableRotation()
   } catch (e) {
     mapError.value = e instanceof Error ? e.message : 'Map failed'
     return
   }
 
-  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right')
-  map.addControl(new maplibregl.ScaleControl({ maxWidth: 100 }), 'bottom-left')
+  map.addControl(new maplibregl.NavigationControl({ showCompass: false, visualizePitch: false }), 'bottom-right')
+  map.addControl(new maplibregl.ScaleControl({ maxWidth: 80 }), 'bottom-left')
 
   map.on('load', () => {
     mapReady.value = true

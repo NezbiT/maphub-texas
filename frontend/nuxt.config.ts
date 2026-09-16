@@ -1,5 +1,8 @@
 import tailwindcss from '@tailwindcss/vite'
 
+// On Vercel the app is served at www.txbizfinder.com/map via the path Worker.
+const baseURL = process.env.NUXT_APP_BASE_URL || (process.env.VERCEL ? '/map/' : '/')
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: false },
@@ -28,17 +31,18 @@ export default defineNuxtConfig({
     },
   },
   app: {
+    baseURL,
     head: {
       title: 'Map Hub Texas — all suite layers on one map',
       meta: [
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
         {
           name: 'description',
           content:
             'Map Hub Texas — Finder, Radar, Channel, Sentinel, Flood, and Power on one interactive map with layer filters.',
         },
       ],
-      link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+      link: [{ rel: 'icon', type: 'image/svg+xml', href: `${baseURL}favicon.svg` }],
     },
   },
   runtimeConfig: {
