@@ -9,6 +9,15 @@ Unified Texas map for **TxBizFinder Intelligence** — all suite layers on one i
 
 Nuxt 4 · Vue 3 · TypeScript · Tailwind v4 · MapLibre · EN/ES · demo APIs
 
+## Deploy
+
+| Piece | Where | Notes |
+|-------|--------|------|
+| Nuxt UI + `/api/layers` | **Vercel** (`frontend/`) | Root Directory `frontend` |
+| Same Node server | **Render** (`render.yaml`) | Demo layers if suite APIs are down |
+
+Cloudflare Worker: `www.txbizfinder.com/map` → `https://maphub-texas.vercel.app`
+
 ## Dev
 
 ```bash
