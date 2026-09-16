@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nuxtjs",
+  "installCommand": "npm --prefix frontend install",
+  "buildCommand": "npm --prefix frontend run build && rm -rf .vercel && mkdir -p .vercel && cp -a frontend/.vercel/output .vercel/output"
+}

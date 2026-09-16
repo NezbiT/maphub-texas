@@ -73,6 +73,6 @@
     "privacyH3": "3. Retencion y seguridad",
     "privacyB3": "Logs are retained for a limited operational period. Use TLS in production, rotate API keys, and restrict admin keys. No method of transmission is 100% secure.",
     "privacyH4": "4. Tus derechos",
-    "privacyB4": "Depending on your location (including California CCPA/CPRA and, if EU personal data is processed, GDPR), you may have rights to access, delete, or correct personal data. Contact legal@txbizfinder.com. Do not send sensitive personal data (SSN, health, full payment card) through this product."
+    "privacyB4": "Depending on your location (including California CCPA/CPRA and, if EU personal data is processed, GDPR), you may have rights to access, delete, or correct personal data. Contact legal{'@'}txbizfinder.com. Do not send sensitive personal data (SSN, health, full payment card) through this product."
   }
 }
