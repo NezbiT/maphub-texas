@@ -290,8 +290,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="flex flex-1 flex-col gap-4 p-4 lg:p-6">
-    <section class="space-y-3">
+  <div class="flex flex-1 flex-col lg:gap-4 lg:p-6">
+    <section class="order-2 space-y-3 p-4 lg:order-1 lg:p-0">
       <div class="flex flex-wrap items-start justify-between gap-3">
         <div class="flex items-start gap-3">
           <div class="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
@@ -434,8 +434,8 @@ onMounted(async () => {
       </p>
     </section>
 
-    <div class="grid flex-1 gap-4 lg:grid-cols-[1fr_300px]">
-      <div class="relative w-full" style="min-height: 400px">
+    <div class="order-1 grid flex-1 gap-0 lg:order-2 lg:grid-cols-[1fr_300px] lg:gap-4">
+      <div class="relative h-[58dvh] min-h-[280px] w-full lg:h-auto lg:min-h-[420px]">
         <ClientOnly>
           <HubMap
             :points="mapPoints"
@@ -446,13 +446,12 @@ onMounted(async () => {
                 ? { lat: zipFocus.lat, lon: zipFocus.lon, zoom: 11, label: zipFocus.label }
                 : null
             "
-            height="min(70vh, 640px)"
+            height="100%"
             @select="onSelect"
           />
           <template #fallback>
             <div
-              class="flex items-center justify-center rounded-xl border bg-muted/40 text-sm text-muted-foreground"
-              style="height: min(70vh, 640px); min-height: 400px"
+              class="flex h-full min-h-[280px] items-center justify-center bg-muted/40 text-sm text-muted-foreground lg:rounded-xl lg:border"
             >
               {{ t('common.loading') }}
             </div>
@@ -464,10 +463,10 @@ onMounted(async () => {
         >
           {{ t('home.pickLayers') }}
         </p>
-        <p v-if="pending" class="mt-2 text-xs text-muted-foreground">{{ t('common.loading') }}</p>
+        <p v-if="pending" class="mt-2 px-4 text-xs text-muted-foreground lg:px-0">{{ t('common.loading') }}</p>
       </div>
 
-      <aside class="space-y-3 lg:sticky lg:top-[4.25rem] lg:self-start">
+      <aside class="space-y-3 p-4 lg:p-0 lg:sticky lg:top-[4.25rem] lg:self-start">
         <Transition name="mh-panel" mode="out-in">
           <div v-if="selected" :key="selected.id" class="rounded-2xl border bg-card p-5 shadow-sm">
             <div class="flex items-start justify-between gap-2">

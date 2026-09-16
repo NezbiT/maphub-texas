@@ -87,10 +87,13 @@ const switchLocale = () => setLocale(locale.value === 'en' ? 'es' : 'en')
       </nav>
     </header>
 
-    <main class="flex flex-1 flex-col">
+    <main class="flex min-h-0 flex-1 flex-col">
       <slot />
     </main>
-    <footer class="border-t px-4 py-2.5 text-center text-[11px] text-muted-foreground">
+    <footer
+      v-if="route.path !== '/'"
+      class="border-t px-4 py-2.5 text-center text-[11px] text-muted-foreground"
+    >
       <p>
         {{ t('common.createdBy') }}
         <a

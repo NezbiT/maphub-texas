@@ -48,6 +48,7 @@ const mapError = ref<string | null>(null)
 let map: maplibregl.Map | null = null
 let ro: ResizeObserver | null = null
 let zipMarker: maplibregl.Marker | null = null
+const onViewport = () => map?.resize()
 const pointIndex = new Map<string, HubPoint>()
 
 const FALLBACK_STYLE: maplibregl.StyleSpecification = {
@@ -298,7 +299,9 @@ function initMap() {
       center,
       zoom: Number(config.public.mapZoom) || 5.5,
       attributionControl: { compact: true },
-      // Slightly cheaper rendering
+      dragRotate: false,
+      pitchWithRotate: false,
+      fadeDuration: 0,
       maxTileCacheSize: 50,
     })
   } catch (e) {
@@ -336,6 +339,9 @@ function initMap() {
 
   ro = new ResizeObserver(() => map?.resize())
   ro.observe(mapEl.value)
+  window.visualViewport?.addEventListener('resize', onViewport)
+  window.addEventListener('orientationchange', onViewport)
+  setTimeout(() => map?.resize(), 250)
 }
 
 onMounted(() => {
@@ -410,6 +416,8 @@ watch(mapReady, (ready) => {
 })
 
 onBeforeUnmount(() => {
+  window.visualViewport?.removeEventListener('resize', onViewport)
+  window.removeEventListener('orientationchange', onViewport)
   ro?.disconnect()
   zipMarker?.remove()
   zipMarker = null
@@ -419,10 +427,13 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="mh-map-root relative w-full" :style="{ height: height, minHeight: '400px' }">
+  <div
+    class="mh-map-root relative w-full min-h-[280px] touch-none"
+    :style="{ height: height, minHeight: height === '100%' ? '280px' : '400px' }"
+  >
     <div
       ref="mapEl"
-      class="absolute inset-0 h-full w-full rounded-xl border border-border bg-slate-900"
+      class="absolute inset-0 h-full w-full touch-none rounded-none border-0 bg-slate-900 sm:rounded-xl sm:border sm:border-border"
     />
     <div
       v-if="mapReady"

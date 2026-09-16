@@ -117,9 +117,12 @@
   box-shadow: 0 0 8px var(--chip, var(--primary));
 }
 
-.mh-map-root :deep(.maplibregl-map) {
+.mh-map-root :deep(.maplibregl-map),
+.mh-map-root :deep(.maplibregl-canvas-container),
+.mh-map-root :deep(.maplibregl-canvas) {
   width: 100%;
   height: 100%;
+  touch-action: none;
 }
 .mh-map-root :deep(.maplibregl-ctrl-group) {
   border-radius: 10px;
