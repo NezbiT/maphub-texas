@@ -1,0 +1,35 @@
+# Map Hub Texas — Nuxt SSR on Render.
+# Layers fall back to demo data if suite APIs are offline.
+
+services:
+  - type: web
+    name: maphub-texas
+    runtime: node
+    plan: starter
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    startCommand: node .output/server/index.mjs
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NITRO_PRESET
+        value: node-server
+      - key: NUXT_PUBLIC_DEMO_MODE
+        value: "true"
+      - key: NUXT_PUBLIC_APP_URL
+        value: https://www.txbizfinder.com/map
+      - key: NUXT_PUBLIC_FINDER_URL
+        value: https://www.txbizfinder.com/app
+      - key: NUXT_PUBLIC_RADAR_URL
+        value: https://www.txbizfinder.com/radar
+      - key: NUXT_PUBLIC_CHANNEL_URL
+        value: https://www.txbizfinder.com/channel
+      - key: NUXT_PUBLIC_SENTINEL_URL
+        value: https://www.txbizfinder.com/sentinel
+      - key: NUXT_PUBLIC_FLOOD_URL
+        value: https://www.txbizfinder.com/flood
+      - key: NUXT_PUBLIC_POWER_URL
+        value: https://www.txbizfinder.com/power
+      - key: MAPHUB_FINDER_API
+        value: https://www.txbizfinder.com

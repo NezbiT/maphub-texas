@@ -63,12 +63,12 @@ export default defineNuxtConfig({
       mapZoom: 5.5,
       // Full product UIs (deep-links from pins)
       suite: {
-        finder: process.env.NUXT_PUBLIC_FINDER_URL || 'http://127.0.0.1:5173/app',
-        radar: process.env.NUXT_PUBLIC_RADAR_URL || 'http://127.0.0.1:3010',
-        channel: process.env.NUXT_PUBLIC_CHANNEL_URL || 'http://127.0.0.1:3011',
-        sentinel: process.env.NUXT_PUBLIC_SENTINEL_URL || 'http://127.0.0.1:3012',
-        flood: process.env.NUXT_PUBLIC_FLOOD_URL || 'http://127.0.0.1:3013',
-        power: process.env.NUXT_PUBLIC_POWER_URL || 'http://127.0.0.1:3014',
+        finder: process.env.NUXT_PUBLIC_FINDER_URL || 'https://www.txbizfinder.com/app',
+        radar: process.env.NUXT_PUBLIC_RADAR_URL || 'https://www.txbizfinder.com/radar',
+        channel: process.env.NUXT_PUBLIC_CHANNEL_URL || 'https://www.txbizfinder.com/channel',
+        sentinel: process.env.NUXT_PUBLIC_SENTINEL_URL || 'https://www.txbizfinder.com/sentinel',
+        flood: process.env.NUXT_PUBLIC_FLOOD_URL || 'https://www.txbizfinder.com/flood',
+        power: process.env.NUXT_PUBLIC_POWER_URL || 'https://www.txbizfinder.com/power',
       },
     },
   },
